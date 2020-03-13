@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         Log.d("AAAAAAAAAAA", raza);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        DetailFragment fragment = new DetailFragment();
-        fragmentTransaction.add(R.id.fragment, fragment, "FRAGMENT_DE_DETALLE");
+        DetailFragment fragment = DetailFragment.newInstance("hola", "como estas?");
+        fragmentTransaction.add(R.id.frame_container, fragment, "FRAGMENT_DE_DETALLE");
         fragmentTransaction.commit();
     }
 }
