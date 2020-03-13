@@ -1,5 +1,7 @@
 package cl.puntogestion.dogapi.view;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -50,24 +52,23 @@ public class MyDogRecyclerViewAdapter extends RecyclerView.Adapter<MyDogRecycler
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position));
+        holder.mIdView.setText(mValues.get(position));
         holder.mContentView.setText(mValues.get(position));
         Log.i("Valor holderItem", holder.mItem);
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("AAAAAAA", "click");
-            }
 
-        });
-    }
+
+         }
 
     @Override
     public int getItemCount() {
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    private String getId(int position){
+        return position != RecyclerView.NO_POSITION ? mValues.get(position) : "No";
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
@@ -78,11 +79,21 @@ public class MyDogRecyclerViewAdapter extends RecyclerView.Adapter<MyDogRecycler
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
+            view.setOnClickListener(this);
+            mIdView.setOnClickListener(this);
+            mContentView.setOnClickListener(this);
         }
 
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
         }
+
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "onClick entrando...");
+            mListener.onListFragmentInteraction(getId(getAdapterPosition()));
+        }
+
     }
 }

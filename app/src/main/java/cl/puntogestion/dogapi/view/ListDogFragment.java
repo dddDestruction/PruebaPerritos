@@ -1,9 +1,13 @@
 package cl.puntogestion.dogapi.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -100,7 +104,16 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
         recyclerView.setAdapter(myAdaptador);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        DetailFragment detalle = new DetailFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+    }
+
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(List<String> lista);
+        void onListFragmentInteraction(String raza);
     }
 }
