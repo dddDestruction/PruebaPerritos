@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cl.puntogestion.dogapi.R;
 import cl.puntogestion.dogapi.view.ListDogFragment.OnListFragmentInteractionListener;
@@ -55,10 +56,9 @@ public class MyDogRecyclerViewAdapter extends RecyclerView.Adapter<MyDogRecycler
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    //mListener.onListFragmentInteraction(holder.mItem);
-                }
+                Log.d("AAAAAAA", "click");
             }
+
         });
     }
 

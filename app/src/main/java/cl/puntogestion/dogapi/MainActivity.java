@@ -3,9 +3,12 @@ package cl.puntogestion.dogapi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import java.util.List;
 
 import cl.puntogestion.dogapi.view.ListDogFragment;
+import cl.puntogestion.dogapi.view.MyDogRecyclerViewAdapter;
 
 public class MainActivity extends AppCompatActivity implements ListDogFragment.OnListFragmentInteractionListener {
 
