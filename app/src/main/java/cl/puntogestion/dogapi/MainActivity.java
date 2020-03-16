@@ -26,12 +26,12 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Listo");
-        Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
+        Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         this.fragLista = ListDogFragment.newInstance(1);
         fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
         fragmentTransaction.addToBackStack("lista").commit();
-        Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
+        Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
     }
 
     @Override
@@ -42,24 +42,24 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         fragDetalle = DetailFragment.newInstance("hola", "como estas?");
         fragmentTransactionListener.add(R.id.frame_container, fragDetalle, "detalle");
         fragmentTransactionListener.addToBackStack("detalle").commit();
-        Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
+        Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
     }
 
     @Override
     public void onBackPressed()
     {
-        int count = getSupportFragmentManager().getBackStackEntryCount();
+        int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
             Log.d(TAG, "En fragLista");
-            super.onBackPressed();
+            finish();
         } else {
             Log.d(TAG, "En detalle");
-            Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
+            Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.remove(this.fragDetalle);
             fragmentTransaction.commit();
-            getSupportFragmentManager().popBackStack();
+            getFragmentManager().popBackStack();
         }
     }
 }
