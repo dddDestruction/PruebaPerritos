@@ -67,7 +67,7 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            Log.d("DDD", "la raza es " + mParam1);
+            Log.d("DDD", "la raza es En DetailFragment" + mParam1);
             this.raza = mParam1;
         }
     }

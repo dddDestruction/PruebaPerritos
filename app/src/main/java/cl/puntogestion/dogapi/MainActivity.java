@@ -63,7 +63,18 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         //Se elimina la el fragmento del FragmenManager
         fragmentTransactionListener.remove(this.fragLista);
         //Se crea un fragmento de Detalle de raza
-        fragDetalle = DetailFragment.newInstance(raza, "como estas?");
+        String subRaza = "";
+        if (raza.contains(" ")){
+
+
+            subRaza = raza.split(" ")[1];
+            raza = raza.split(" ")[0];
+            Log.d("DDD", "raza cortado " + raza);
+            Log.d("DDD", "subRaza cortado " + subRaza);
+            raza = raza + "/" + subRaza;
+            Log.d("DDD", "concatenado " + raza);
+        }
+        fragDetalle = DetailFragment.newInstance(raza, subRaza);
         //Se agrega el fragmento al FragmentManager
         fragmentTransactionListener.add(R.id.frame_container, fragDetalle, "detalle");
         //Se Agrega la transacción al FragmentManager con el nombre "detalle" para identificarlo y se commitea

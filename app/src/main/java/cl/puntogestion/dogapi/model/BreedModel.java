@@ -64,8 +64,7 @@ public class BreedModel implements IModel {
     @Override
     public void loadImages(String raza, String subRaza) {
         //La subraza aun no se ocupa
-        Log.d("DDD", "Entrando al load images");
-        Log.d("DDD", ""+raza);
+        Log.d("DDD", "Entrando al load images En el BreedModel"+raza);
         IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
 
         Call<RazaImagen> listCall = servicio.listaImagenes(raza);
