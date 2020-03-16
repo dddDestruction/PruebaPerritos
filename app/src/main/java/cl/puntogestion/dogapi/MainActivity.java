@@ -16,19 +16,38 @@ import cl.puntogestion.dogapi.view.MyDogRecyclerViewAdapter;
 
 public class MainActivity extends AppCompatActivity implements ListDogFragment.OnListFragmentInteractionListener {
 
+    private static final String TAG = "AAA";
+    FragmentManager fragmentManager = getFragmentManager();
+    ListDogFragment fragLista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "Listo");
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        this.fragLista = ListDogFragment.newInstance(1);
+        fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
+        fragmentTransaction.addToBackStack("lista").commit();
     }
 
     @Override
     public void onListFragmentInteraction(String raza) {
-        Log.d("AAAAAAAAAAA", raza);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Log.d(TAG, raza);
+        FragmentTransaction fragmentTransactionListener = fragmentManager.beginTransaction();
+        fragmentTransactionListener.remove(this.fragLista);
         DetailFragment fragment = DetailFragment.newInstance("hola", "como estas?");
-        fragmentTransaction.add(R.id.frame_container, fragment, "FRAGMENT_DE_DETALLE");
-        fragmentTransaction.commit();
+        fragmentTransactionListener.add(R.id.frame_container, fragment, "detalle");
+        fragmentTransactionListener.commit();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if (fragmentManager.getPrimaryNavigationFragment() == this.fragLista){
+            super.onBackPressed();
+        }else{
+            fragmentManager.popBackStack("lista", 0);
+        }
     }
 }
