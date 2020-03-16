@@ -19,16 +19,19 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     private static final String TAG = "AAA";
     FragmentManager fragmentManager = getFragmentManager();
     ListDogFragment fragLista;
+    DetailFragment fragDetalle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Listo");
+        Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         this.fragLista = ListDogFragment.newInstance(1);
         fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
         fragmentTransaction.addToBackStack("lista").commit();
+        Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
     }
 
     @Override
@@ -36,18 +39,27 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         Log.d(TAG, raza);
         FragmentTransaction fragmentTransactionListener = fragmentManager.beginTransaction();
         fragmentTransactionListener.remove(this.fragLista);
-        DetailFragment fragment = DetailFragment.newInstance("hola", "como estas?");
-        fragmentTransactionListener.add(R.id.frame_container, fragment, "detalle");
-        fragmentTransactionListener.commit();
+        fragDetalle = DetailFragment.newInstance("hola", "como estas?");
+        fragmentTransactionListener.add(R.id.frame_container, fragDetalle, "detalle");
+        fragmentTransactionListener.addToBackStack("detalle").commit();
+        Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
     }
 
     @Override
     public void onBackPressed()
     {
-        if (fragmentManager.getPrimaryNavigationFragment() == this.fragLista){
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            Log.d(TAG, "En fragLista");
             super.onBackPressed();
-        }else{
-            fragmentManager.popBackStack("lista", 0);
+        } else {
+            Log.d(TAG, "En detalle");
+            Log.d(TAG, "count" + getSupportFragmentManager().getBackStackEntryCount());
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(this.fragDetalle);
+            fragmentTransaction.commit();
+            getSupportFragmentManager().popBackStack();
         }
     }
 }
