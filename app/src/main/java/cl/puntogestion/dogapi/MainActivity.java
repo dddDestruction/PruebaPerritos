@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         //Se agrega el fragmento junto con el contenedor asociado y una tag para identificarlo al FragmentManager
         fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
         //Se commitean las operaciones de la transacción y se agrega la misma al FragmentManager con .addToBackStack
-        fragmentTransaction.addToBackStack("lista").commit();
+        fragmentTransaction.commit();
         //Se busca saber si funciona el agregar al BackStack
         Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
     }
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         fragmentTransactionListener.add(R.id.frame_container, fragDetalle, "detalle");
         //Se Agrega la transacción al FragmentManager con el nombre "detalle" para identificarlo y se commitea
         fragmentTransactionListener.addToBackStack("detalle").commit();
-        //Se pregunta si se agregó la transacción al BackStack
-        Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
     }
     /*
     Aquí se busca programar las acciones que se realizan por la app cuando se apreta el botón voler del celular
@@ -95,14 +93,9 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         } else {
             //En cualquier otro case se asume que se esta mostrando el fragmento detalle,.
             Log.d(TAG, "En detalle");
-            //Se revisa si es que es así
-            Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
-            //se crea una nueva transacción para quitar el fragmento detalle
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.remove(this.fragDetalle);
-            fragmentTransaction.commit();
             //Se muestra vuelve a realizar la última transacción
             getFragmentManager().popBackStack();
+            Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
         }
     }
 
