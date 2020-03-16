@@ -33,7 +33,7 @@
             app:layout_constraintTop_toBottomOf="@+id/raza" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewDetail"
             android:layout_width="300dp"
             android:layout_height="300dp"
             app:layout_constraintBottom_toBottomOf="parent"

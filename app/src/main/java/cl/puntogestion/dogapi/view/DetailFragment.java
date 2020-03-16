@@ -1,5 +1,6 @@
 package cl.puntogestion.dogapi.view;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -7,6 +8,12 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cl.puntogestion.dogapi.R;
 
@@ -24,6 +31,8 @@ public class DetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private OnLongClickPerritos listener;
+    RecyclerView recyclerView;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -59,8 +68,20 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        List<String> lista = new ArrayList<String>();
+        lista.add("http://i.imgur.com/DvpvklR.png");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false);
+        View view =  inflater.inflate(R.layout.fragment_detail, container, false);
+
+        Context context = view.getContext();
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDetail);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        DogPhotoRecycleViewAdapter myAdaptador = new DogPhotoRecycleViewAdapter(lista, listener);
+        recyclerView.setAdapter(myAdaptador);
+
+        return view;
     }
     public interface OnLongClickPerritos {
         void OnLongClickPerritos(String urlImagen);
