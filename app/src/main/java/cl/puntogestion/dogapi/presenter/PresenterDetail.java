@@ -1,14 +1,18 @@
 package cl.puntogestion.dogapi.presenter;
 
+import android.util.Log;
+
+import java.util.List;
+
 import cl.puntogestion.dogapi.model.IModel;
 
-public class PresenterDetail implements IPresenterDetail, IPresenterViewDetail  {
+public class PresenterDetail implements IPresenterDetail, IPresenterModel  {
 
-    IPresenterViewDetail iPresenterViewDetail;
+    IPresenterViewImages iPresenterViewImages;
     IModel imodel;
 
-    public PresenterDetail(IPresenterViewDetail iPresenterViewDetail) {
-        this.iPresenterViewDetail = iPresenterViewDetail;
+    public PresenterDetail(IPresenterViewImages presenter) {
+        this.iPresenterViewImages = presenter;
     }
 
     public void setImodel(IModel imodel) {
@@ -17,7 +21,8 @@ public class PresenterDetail implements IPresenterDetail, IPresenterViewDetail  
 
     @Override
     public void loadBreedImages(String breed) {
-
+        imodel.loadImages(breed, breed);
+        Log.d("AAA", "loadIMages");
     }
 
     @Override
@@ -26,7 +31,12 @@ public class PresenterDetail implements IPresenterDetail, IPresenterViewDetail  
     }
 
     @Override
-    public void showBreedImages(String breed) {
-        iPresenterViewDetail.showBreedImages(breed);
+    public void notificar(List<String> urls) {
+        Log.d("DDD", "En Presentador" + urls.toString());
+        iPresenterViewImages.notificar(urls);
+    }
+
+    public interface IPresenterViewImages {
+        void notificar(List<String> lista);
     }
 }

@@ -17,7 +17,6 @@ import retrofit2.Response;
 public class BreedModel implements IModel {
 
     IPresenterModel iPresenterModel;
-    IPresenterDetail iPresenterDetail;
 
 
     public BreedModel(IPresenterModel iPresenterModel) {
@@ -64,6 +63,9 @@ public class BreedModel implements IModel {
 
     @Override
     public void loadImages(String raza, String subRaza) {
+        //La subraza aun no se ocupa
+        Log.d("DDD", "Entrando al load images");
+        Log.d("DDD", ""+raza);
         IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
 
         Call<RazaImagen> listCall = servicio.listaImagenes(raza);
@@ -73,15 +75,17 @@ public class BreedModel implements IModel {
             @Override
             public void onResponse(Call<RazaImagen> call, Response<RazaImagen> response) {
                 RazaImagen listaRazas = response.body();
-                Map<Integer, String> lista = listaRazas.getMessage();
+                List<String> lista = listaRazas.getMessage();
 
-                //Log.i("Valor", ""+listaPerros);
-                iPresenterDetail.loadBreedImages(raza);
+                Log.d("DDD", "En modelo "+lista.toString());
+                iPresenterModel.notificar(lista);
+
             }
 
             @Override
             public void onFailure(Call<RazaImagen> call, Throwable t) {
-
+                Log.d("DDD", "Fallamos");
+                Log.e("DDD", t.toString());
             }
         });
     }

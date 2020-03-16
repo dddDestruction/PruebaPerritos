@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cl.puntogestion.dogapi.R;
+import cl.puntogestion.dogapi.model.BreedModel;
+import cl.puntogestion.dogapi.presenter.IPresenterViewDetail;
+import cl.puntogestion.dogapi.presenter.PresenterDetail;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment implements PresenterDetail.IPresenterViewImages, IPresenterViewDetail {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -68,21 +72,33 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        List<String> lista = new ArrayList<String>();
-        lista.add("http://i.imgur.com/DvpvklR.png");
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_detail, container, false);
 
         Context context = view.getContext();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDetail);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
-        DogPhotoRecycleViewAdapter myAdaptador = new DogPhotoRecycleViewAdapter(lista, listener);
-        recyclerView.setAdapter(myAdaptador);
+        //Enlace entre vista y presentador
+        PresenterDetail presentador = new PresenterDetail(this);
+        presentador.setImodel(new BreedModel(presentador));
+        presentador.loadBreedImages("poodle");
 
         return view;
     }
+
+    @Override
+    public void notificar(List<String> lista) {
+        Log.d("DDD", "En Adapter "+lista);
+        DogPhotoRecycleViewAdapter myAdaptador = new DogPhotoRecycleViewAdapter(lista, listener);
+        recyclerView.setAdapter(myAdaptador);
+    }
+
+    @Override
+    public void showBreedImages(String breed) {
+
+    }
+
     public interface OnLongClickPerritos {
         void OnLongClickPerritos(String urlImagen);
     }
