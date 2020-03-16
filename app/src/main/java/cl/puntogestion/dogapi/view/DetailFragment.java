@@ -76,7 +76,7 @@ public class DetailFragment extends Fragment {
         Context context = view.getContext();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDetail);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
         DogPhotoRecycleViewAdapter myAdaptador = new DogPhotoRecycleViewAdapter(lista, listener);
         recyclerView.setAdapter(myAdaptador);
