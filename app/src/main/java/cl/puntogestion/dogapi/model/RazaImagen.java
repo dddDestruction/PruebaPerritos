@@ -4,13 +4,13 @@ import java.util.Map;
 
 public class RazaImagen {
     private String status;
-    private Map<String,String>message;
+    private Map<Integer,String>message;
 
     public String getStatus() {
         return status;
     }
 
-    public Map<String, String> getMessage() {
+    public Map<Integer, String> getMessage() {
         return message;
 
     }

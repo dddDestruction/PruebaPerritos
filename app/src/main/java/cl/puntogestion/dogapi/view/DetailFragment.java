@@ -62,4 +62,7 @@ public class DetailFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false);
     }
+    public interface OnLongClickPerritos {
+        void OnLongClickPerritos(String urlImagen);
+    }
 }
