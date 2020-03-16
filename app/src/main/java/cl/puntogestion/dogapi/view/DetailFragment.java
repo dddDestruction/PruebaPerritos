@@ -31,6 +31,7 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private String raza;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,6 +67,8 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.d("DDD", "la raza es " + mParam1);
+            this.raza = mParam1;
         }
     }
 
@@ -82,7 +85,7 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
         //Enlace entre vista y presentador
         PresenterDetail presentador = new PresenterDetail(this);
         presentador.setImodel(new BreedModel(presentador));
-        presentador.loadBreedImages("poodle");
+        presentador.loadBreedImages(raza);
 
         return view;
     }

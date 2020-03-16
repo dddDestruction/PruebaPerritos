@@ -21,7 +21,7 @@ import cl.puntogestion.dogapi.R;
 public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRecycleViewAdapter.ViewHolderImages> {
 
     private ImageView imagenes;
-    private final String TAG = "AAA";
+    private final String TAG = "DDD";
     private List<String> mUrls;
     DetailFragment.OnLongClickPerritos mListener;
 
@@ -52,7 +52,7 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.perrito);
 
        Glide.with(holder.perrito.getContext()) //3
-                .load("http://i.imgur.com/DvpvklR.png")
+                .load(mUrls.get(position))
                 .centerCrop()
                 .into(holder.perrito);
 
@@ -61,8 +61,7 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
 
     @Override
     public int getItemCount() {
-        //return mUrls.size();
-        return 1;
+        return mUrls.size();
     }
 
     private String getUrl(int position){
