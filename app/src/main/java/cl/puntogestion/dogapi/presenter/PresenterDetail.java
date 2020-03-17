@@ -21,13 +21,14 @@ public class PresenterDetail implements IPresenterDetail, IPresenterModel  {
 
     @Override
     public void loadBreedImages(String breed) {
-        imodel.loadImages(breed, breed);
-        Log.d("AAA", "loadIMages");
+        imodel.loadImages(breed);
+        Log.d("AAA", "loadIMages En Presenter");
     }
 
     @Override
     public void loadSubBreedImages(String breed, String subBreed) {
-
+        imodel.loadImagesSubraza(breed, subBreed);
+        Log.d("AAA", "loadSubBreedIMages En Presenter");
     }
 
     @Override

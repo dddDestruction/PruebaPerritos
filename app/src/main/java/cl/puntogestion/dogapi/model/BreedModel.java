@@ -62,12 +62,38 @@ public class BreedModel implements IModel {
     }
 
     @Override
-    public void loadImages(String raza, String subRaza) {
-        //La subraza aun no se ocupa
+    public void loadImages(String raza) {
         Log.d("DDD", "Entrando al load images En el BreedModel"+raza);
         IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
 
         Call<RazaImagen> listCall = servicio.listaImagenes(raza);
+        List<String> listaFotosPerros = new ArrayList<>();
+
+        listCall.enqueue(new Callback<RazaImagen>() {
+            @Override
+            public void onResponse(Call<RazaImagen> call, Response<RazaImagen> response) {
+                RazaImagen listaRazas = response.body();
+                List<String> lista = listaRazas.getMessage();
+
+                Log.d("DDD", "En modelo "+lista.toString());
+                iPresenterModel.notificar(lista);
+
+            }
+
+            @Override
+            public void onFailure(Call<RazaImagen> call, Throwable t) {
+                Log.d("DDD", "Fallamos");
+                Log.e("DDD", t.toString());
+            }
+        });
+    }
+
+    @Override
+    public void loadImagesSubraza(String raza, String subRaza) {
+        Log.d("DDD", "Entrando al load images subRaza En el BreedModel "+raza);
+        IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
+
+        Call<RazaImagen> listCall = servicio.listaImagenesSubraza(raza, subRaza);
         List<String> listaFotosPerros = new ArrayList<>();
 
         listCall.enqueue(new Callback<RazaImagen>() {

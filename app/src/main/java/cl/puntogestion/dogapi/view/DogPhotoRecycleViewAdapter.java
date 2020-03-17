@@ -51,7 +51,7 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
         Log.d(TAG, "onBindDetail");
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.perrito);
 
-       Glide.with(holder.perrito.getContext()) //3
+        Glide.with(holder.perrito.getContext()) //3
                 .load(mUrls.get(position))
                 .centerCrop()
                 .into(holder.perrito);

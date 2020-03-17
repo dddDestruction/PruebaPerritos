@@ -13,4 +13,7 @@ public interface IDogDataBase {
 
     @GET("api/breed/{breed}/images")
     Call<RazaImagen> listaImagenes(@Path("breed") String breed);
+
+    @GET("api/breed/{breed}/{subBreed}/images")
+    Call<RazaImagen> listaImagenesSubraza(@Path("breed") String breed, @Path("subBreed") String subBreed);
 }
