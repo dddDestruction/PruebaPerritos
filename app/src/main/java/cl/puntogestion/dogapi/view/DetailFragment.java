@@ -74,7 +74,7 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         TextView titulo = view.findViewById(R.id.raza);
         TextView subTitulo = view.findViewById(R.id.subraza);
-
+        listener = (OnLongClickPerritos) context;
         //Enlace entre vista y presentador
         PresenterDetail presentador = new PresenterDetail(this);
         presentador.setImodel(new BreedModel(presentador));
@@ -97,17 +97,6 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
 
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnLongClickPerritos) {
-            listener = (OnLongClickPerritos) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
     }
 
     @Override

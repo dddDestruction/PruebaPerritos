@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
 
     @Override
     public void OnLongClickPerritos(String urlImagen) {
-
+        Log.d("DDD", "En ONLongClickPerritos en Main");
+        Toast.makeText(this, "Me gusta este perrito", Toast.LENGTH_LONG).show();
     }
 }
