@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,10 +72,13 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
         Context context = view.getContext();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDetail);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        TextView titulo = view.findViewById(R.id.raza);
+        TextView subTitulo = view.findViewById(R.id.subraza);
 
         //Enlace entre vista y presentador
         PresenterDetail presentador = new PresenterDetail(this);
         presentador.setImodel(new BreedModel(presentador));
+
 
         if (raza.contains(" ")){
             subRaza = raza.split(" ")[1];
@@ -82,13 +86,28 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
             Log.d("DDD", "raza cortado " + raza);
             Log.d("DDD", "subRaza cortado " + subRaza);
             presentador.loadSubBreedImages(raza, subRaza);
+
+            titulo.setText(raza);
+            subTitulo.setText(subRaza);
         }else{
             presentador.loadBreedImages(raza);
+            titulo.setText(raza);
+            subTitulo.setText("");
         }
 
 
-
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnLongClickPerritos) {
+            listener = (OnLongClickPerritos) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
     }
 
     @Override

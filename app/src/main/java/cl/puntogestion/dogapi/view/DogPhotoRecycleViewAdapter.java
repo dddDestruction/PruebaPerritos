@@ -17,7 +17,20 @@ import java.util.List;
 
 import cl.puntogestion.dogapi.R;
 
+/*
+    El Adapter es una clase que extiende de RecyclerView.Adapter< aquí va el ViewHolder > que
+     a su vez recibe un Objeto denominado ViewHolder.Queda como se ve abajo
 
+    public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRecycleViewAdapter.ViewHolderImages>
+
+    En este caso se denomina al ViewHolder "ViewHolderImages" y dice que es parte de la clase DogPhotoRecycleViewAdapter
+    por lo tanto Android Studio nos obligará a crear la clase ViewHolderImages dentro de esta clase. Además por extender
+    de RecyclerView.Adapter, nos obligará a implementar 3 clases más, que son onCreateViewHolder, onBindViewHolder y getItemCount.
+    Además en la clase ViewHolderImages nos obligará a extender de RecyclerView.ViewHolder para que sea considerado un ViewHolder
+    y por extender de ViewHolder nos va a obligar a implementar un constructor.
+
+    Por último tenemos que crear un constructor para la clase adapter y con eso queda lista la estructura del Adapter
+ */
 public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRecycleViewAdapter.ViewHolderImages> {
 
     private ImageView imagenes;
@@ -89,6 +102,7 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
         @Override
         public boolean onLongClick(View v) {
             Log.d(TAG, "onLongClick entrando...");
+            Log.d(TAG, getUrl(getAdapterPosition()));
             mListener.OnLongClickPerritos(getUrl(getAdapterPosition()));
             return false;
         }
