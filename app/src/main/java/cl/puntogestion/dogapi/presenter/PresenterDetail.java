@@ -5,8 +5,9 @@ import android.util.Log;
 import java.util.List;
 
 import cl.puntogestion.dogapi.model.IModel;
+import cl.puntogestion.dogapi.model.IPresenterModel;
 
-public class PresenterDetail implements IPresenterDetail, IPresenterModel  {
+public class PresenterDetail implements IPresenterDetail, IPresenterModel {
 
     IPresenterViewImages iPresenterViewImages;
     IModel imodel;
@@ -30,13 +31,16 @@ public class PresenterDetail implements IPresenterDetail, IPresenterModel  {
         imodel.loadImagesSubraza(breed, subBreed);
         Log.d("AAA", "loadSubBreedIMages En Presenter");
     }
-
+    /*
+    Implementación de IPresenterModel
+     */
     @Override
     public void notificar(List<String> urls) {
         Log.d("DDD", "En Presentador" + urls.toString());
         iPresenterViewImages.notificar(urls);
     }
 
+    //Interfaz de comunicación con las vistas
     public interface IPresenterViewImages {
         void notificar(List<String> lista);
     }

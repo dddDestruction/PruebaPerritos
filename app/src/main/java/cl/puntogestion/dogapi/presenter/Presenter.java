@@ -2,17 +2,10 @@ package cl.puntogestion.dogapi.presenter;
 
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import cl.puntogestion.dogapi.model.IModel;
-import cl.puntogestion.dogapi.model.api.IDogDataBase;
-import cl.puntogestion.dogapi.model.api.RetrofitClient;
-import cl.puntogestion.dogapi.model.RazasLista;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import cl.puntogestion.dogapi.model.IPresenterModel;
 
 public class Presenter implements IPresenter, IPresenterModel {
 

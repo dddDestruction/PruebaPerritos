@@ -8,30 +8,35 @@ import java.util.Map;
 
 import cl.puntogestion.dogapi.model.api.IDogDataBase;
 import cl.puntogestion.dogapi.model.api.RetrofitClient;
-import cl.puntogestion.dogapi.presenter.IPresenterDetail;
-import cl.puntogestion.dogapi.presenter.IPresenterModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/*
+    El BreedModel es la clase que realiza las llamadas para obtener los datos de la API a través de Retrofit
+ */
 public class BreedModel implements IModel {
-
+    //Esta es la interfaz que se utiliza como Callback para enviar información al Presenter y está implementado en Presenter
     IPresenterModel iPresenterModel;
 
-
+    //Constructor de clase BreedModel para asignarlo una instancia al Presenter
     public BreedModel(IPresenterModel iPresenterModel) {
         this.iPresenterModel = iPresenterModel;
     }
 
-    private static final String TAG = "breedModel";
-
+    //Implementación de métodos de IModel, en este caso este método se utiliza para obtener todas las razas de perros
     @Override
     public void loadBreeds() {
+        /*
+        Este método usa Retrofit para obtener los datos, para esto implementa una llamada de Retrofit
+        de la forma estándar, inst
+         */
+        //Se crea una instancia de la clase autogenerada de llamadas IDogDataBase llamada servicio a través de la interfaz
         IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
-
+        //Se crea una instancia de la clase Call llamada listCall que recibo como parámetros la clase Pojo RazasLista
         Call<RazasLista> listCall = servicio.listaRazas();
+        //Se crea una lista para recibir los datos
         List<String> listaPerros = new ArrayList<>();
-
+        //Se en cola la llamada a través de listCall
         listCall.enqueue(new Callback<RazasLista>() {
             @Override
             public void onResponse(Call<RazasLista> call, Response<RazasLista> response) {
@@ -48,7 +53,6 @@ public class BreedModel implements IModel {
                     }
 
                 }
-                //Log.i("Valor", ""+listaPerros);
                 iPresenterModel.notificar(listaPerros);
             }
 
