@@ -35,24 +35,13 @@ public class BreedModel implements IModel {
         //Se crea una instancia de la clase Call llamada listCall que recibo como parámetros la clase Pojo RazasLista
         Call<RazasLista> listCall = servicio.listaRazas();
         //Se crea una lista para recibir los datos
-        List<String> listaPerros = new ArrayList<>();
         //Se en cola la llamada a través de listCall
         listCall.enqueue(new Callback<RazasLista>() {
             @Override
             public void onResponse(Call<RazasLista> call, Response<RazasLista> response) {
                 RazasLista listaRazas = response.body();
-                Map<String, List<String>> mapa = listaRazas.getMessage();
+                List<String> listaPerros = listaRazas.getMessage();
 
-                for (String key : mapa.keySet()) {
-                    if (mapa.get(key).isEmpty()) {
-                        listaPerros.add(key);
-                    } else {
-                        for (String subRaza : mapa.get(key)) {
-                            listaPerros.add(key + " " + subRaza);
-                        }
-                    }
-
-                }
                 iPresenterModel.notificar(listaPerros);
             }
 
