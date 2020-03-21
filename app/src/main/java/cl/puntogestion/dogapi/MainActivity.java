@@ -6,7 +6,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -40,8 +43,6 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Listo");
-        //En el siguiente log se busca saber la cantidad de transacciones agregadas al "BackStack".
-        Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
         //Se inicia una nueva trasacción
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //Se crea una isntancia de fragmento de lista de raza y se asigna al atributo de clase
@@ -50,8 +51,15 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
         //Se commitean las operaciones de la transacción y se agrega la misma al FragmentManager con .addToBackStack
         fragmentTransaction.commit();
-        //Se busca saber si funciona el agregar al BackStack
-        Log.d(TAG, "count" + getFragmentManager().getBackStackEntryCount());
+
+        FloatingActionButton fab = findViewById(R.id.favoritos);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Hice click para ver favoritos", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     //Este es el listener de la actividad, este método se ejecuta cuando se hace un click sobre una raza
