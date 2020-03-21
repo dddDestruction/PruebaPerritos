@@ -1,13 +1,14 @@
 package cl.puntogestion.dogapi.view;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import android.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,6 +77,12 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
             presentador.setImodel(new BreedModel(presentador));
             presentador.loadBreeds();
         }
+
+        FragmentManager fragmentManagerEnList = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManagerEnList.beginTransaction();
+        BotonFavoritosFragment fragboton = BotonFavoritosFragment.newInstance();
+        fragmentTransaction.add(R.id.frameBoton, fragboton, "lista");
+        fragmentTransaction.commit();
         return view;
     }
 
