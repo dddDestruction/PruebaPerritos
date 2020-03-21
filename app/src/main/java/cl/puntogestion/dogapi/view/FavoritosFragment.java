@@ -1,5 +1,6 @@
 package cl.puntogestion.dogapi.view;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,13 +8,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import cl.puntogestion.dogapi.R;
 
 public class FavoritosFragment extends Fragment {
 
     //Agregar parámetros
-
+    private Button botonFavoritos;
     public FavoritosFragment() {
         // Required empty public constructor
     }
@@ -30,6 +33,7 @@ public class FavoritosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             //mParam1 = getArguments().getString(ARG_PARAM1);
             //mParam2 = getArguments().getString(ARG_PARAM2);
@@ -39,6 +43,14 @@ public class FavoritosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Context context = container.getContext();
+        botonFavoritos = new Button(context);
+        botonFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText( context,"Hice click para ver favoritos", Toast.LENGTH_SHORT).show();
+            }
+        });
         return inflater.inflate(R.layout.fragment_favoritos, container, false);
     }
 }

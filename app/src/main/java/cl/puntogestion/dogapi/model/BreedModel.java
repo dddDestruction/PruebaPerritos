@@ -32,7 +32,7 @@ public class BreedModel implements IModel {
          */
         //Se crea una instancia de la clase autogenerada de llamadas IDogDataBase llamada servicio a través de la interfaz
         IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
-        //Se crea una instancia de la clase Call llamada listCall que recibo como parámetros la clase Pojo RazasLista
+        //Se crea una instancia de la clase Call llamada listCall que recibe como parámetros la clase Pojo RazasLista
         Call<RazasLista> listCall = servicio.listaRazas();
         //Se crea una lista para recibir los datos
         //Se en cola la llamada a través de listCall
