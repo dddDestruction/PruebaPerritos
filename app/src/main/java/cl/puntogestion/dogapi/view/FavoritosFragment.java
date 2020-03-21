@@ -13,16 +13,16 @@ import android.widget.Toast;
 
 import cl.puntogestion.dogapi.R;
 
-public class BotonFavoritosFragment extends Fragment {
+public class FavoritosFragment extends Fragment {
 
     //Agregar parámetros
     private Button botonFavoritos;
-    public BotonFavoritosFragment() {
+    public FavoritosFragment() {
         // Required empty public constructor
     }
 
-    public static BotonFavoritosFragment newInstance() {
-        BotonFavoritosFragment fragment = new BotonFavoritosFragment();
+    public static FavoritosFragment newInstance() {
+        FavoritosFragment fragment = new FavoritosFragment();
         Bundle args = new Bundle();
         //args.putString(ARG_PARAM1, param1);
         //args.putString(ARG_PARAM2, param2);
@@ -51,6 +51,6 @@ public class BotonFavoritosFragment extends Fragment {
                 Toast.makeText( context,"Hice click para ver favoritos", Toast.LENGTH_LONG).show();
             }
         });
-        return inflater.inflate(R.layout.fragment_boton_favoritos, container, false);
+        return inflater.inflate(R.layout.fragment_favoritos, container, false);
     }
 }

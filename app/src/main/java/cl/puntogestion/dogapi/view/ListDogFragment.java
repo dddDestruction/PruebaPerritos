@@ -3,10 +3,8 @@ package cl.puntogestion.dogapi.view;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import android.app.Fragment;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -67,6 +64,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
+            mListener = (OnListFragmentInteractionListener) context;
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -77,26 +75,9 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
             presentador.setImodel(new BreedModel(presentador));
             presentador.loadBreeds();
         }
-
-        FragmentManager fragmentManagerEnList = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManagerEnList.beginTransaction();
-        BotonFavoritosFragment fragboton = BotonFavoritosFragment.newInstance();
-        fragmentTransaction.add(R.id.frameBoton, fragboton, "lista");
-        fragmentTransaction.commit();
         return view;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
