@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -26,20 +27,22 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
     public FavoritosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "En onCreateViewHolder en FavoritosAdapter");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_imagenes, parent, false);
+                .inflate(R.layout.item_imagen_fav, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoritosAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "En onBindViewHolder en FavoritosAdapter "+listaFav.get(position));
+        Log.d(TAG, "En onBindViewHolder en FavoritosAdapter "+listaFav.get(position) + holder.imagenFav);
+        Picasso.get().load(listaFav.get(position)).into(holder.imagenFav);
         /*
-        Glide.with(holder.imagenFav.getContext()) //3
+        Glide.with(holder.imagenFav.getContext())
                 .load(listaFav.get(position))
                 .centerCrop()
                 .into(holder.imagenFav);
 
          */
+
     }
 
     @Override

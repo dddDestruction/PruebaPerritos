@@ -15,7 +15,6 @@ public class PresenterFav {
         favoritas.add("http://3.bp.blogspot.com/_eYl3G1EYGr0/Sa7AQCIWkkI/AAAAAAAAAzY/voHBmLfthik/s320/razas-perros-broholmer.jpg");
         favoritas.add("http://4.bp.blogspot.com/_n_Odiv2B52M/SSoWwAaLZeI/AAAAAAAAABM/bmCsLLwgFmg/S269/razas-perros-collie.jpg");
         favoritas.add("https://www.hillspet.co.uk/content/dam/cp-sites/hills/hills-pet/global/articles/dog-care/dog-breeds/img_DogBreed-Beagle.jpg");
-        favoritas.add("https://thenypost.files.wordpress.com/2013/11/corgi.jpg?quality=90&strip=all&w=1200");
         favoritas.add("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Berger_blanc_suisse3.jpg/220px-Berger_blanc_suisse3.jpg");
         favoritas.add("https://www.mundoanimalia.com/images/animal/f3/b3/ea/1a3f528a7f59019679c74f693310a5e1/thumbm_image__5697.jpeg");
         favoritas.add("https://vignette.wikia.nocookie.net/perros/images/5/5d/Belgagro.jpg/revision/latest?cb=20071206030759");
