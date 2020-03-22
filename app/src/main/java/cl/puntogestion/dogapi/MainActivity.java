@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     @Override
     public void onListFragmentInteraction(String raza) {
         Log.d(TAG, raza);
-        /*
+
         //Se crea una nueva transacción
         FragmentTransaction fragmentTransactionListener = fragmentManager.beginTransaction();
         //Se elimina la el fragmento del FragmenManager
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         //Se Agrega la transacción al FragmentManager con el nombre "detalle" para identificarlo y se commitea
         fragmentTransactionListener.addToBackStack("detalle").commit();
 
-         */
     }
     /*
     Aquí se busca programar las acciones que se realizan por la app cuando se apreta el botón voler del celular
