@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import cl.puntogestion.dogapi.view.DetailFragment;
+import cl.puntogestion.dogapi.view.FavoritosFragment;
 import cl.puntogestion.dogapi.view.ListDogFragment;
 
 /*
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     //Se crean variables de fragmento de lista de razas y detalle de raza para utilizar las mismas en cada método de la actividad
     ListDogFragment fragLista;
     DetailFragment fragDetalle;
+    FavoritosFragment fragFav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Hice click para ver favoritos", Toast.LENGTH_LONG).show();
+                FragmentTransaction fragmentTransactionFav = fragmentManager.beginTransaction();
+                fragFav = FavoritosFragment.newInstance();
+                fragmentTransactionFav.add(R.id.frame_container, fragFav, "lista");
+                fragmentTransactionFav.commit();
             }
         });
 

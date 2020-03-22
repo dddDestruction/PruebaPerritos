@@ -5,16 +5,24 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import java.util.List;
+
 import cl.puntogestion.dogapi.R;
 
 public class FavoritosFragment extends Fragment {
-
+    RecyclerView recyclerView;
+    private static final String TAG = "AAA";
     //Agregar parámetros
     private Button botonFavoritos;
     public FavoritosFragment() {
@@ -43,14 +51,15 @@ public class FavoritosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Context context = container.getContext();
-        botonFavoritos = new Button(context);
-        botonFavoritos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText( context,"Hice click para ver favoritos", Toast.LENGTH_LONG).show();
-            }
-        });
-        return inflater.inflate(R.layout.fragment_favoritos, container, false);
+        Log.d(TAG, "En OnCreateView en FavoritosFragment");
+        View view =  inflater.inflate(R.layout.fragment_favoritos, container, false);
+
+        Context context = view.getContext();
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewFavoritos);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
+        FavoritosAdapter myAdaptador = new FavoritosAdapter();
+        myAdaptador.setListaFav();
+        recyclerView.setAdapter(myAdaptador);
+        return view;
     }
 }
