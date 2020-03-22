@@ -8,14 +8,22 @@ import java.util.Map;
  */
 public class RazasLista {
 
+    private Map<String, List<String>> message;
     private String status;
-    private List<String> message;
+
+    public Map<String, List<String>> getMessage() {
+        return message;
+    }
+
+    public void setMessage(Map<String, List<String>> message) {
+        this.message = message;
+    }
 
     public String getStatus() {
         return status;
     }
 
-    public List<String> getMessage() {
-        return message;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

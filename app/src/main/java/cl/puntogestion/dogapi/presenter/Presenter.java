@@ -5,11 +5,10 @@ import android.util.Log;
 import java.util.List;
 
 import cl.puntogestion.dogapi.model.IModel;
-import cl.puntogestion.dogapi.model.IPresenterModel;
 
 public class Presenter implements IPresenter, IPresenterModel {
 
-    private static final String TAG = "Presenter";
+    private static final String TAG = "AAA";
     IModel imodel;
     IPresenterViewList iPresenterViewList;
 
@@ -20,11 +19,13 @@ public class Presenter implements IPresenter, IPresenterModel {
     }
 
     public void setImodel(IModel imodel) {
+        Log.d(TAG, "En Presenter setImodel");
         this.imodel = imodel;
     }
 
     @Override
     public void loadBreeds() {
+        Log.d(TAG, "En Presenter loadBreeds");
         imodel.loadBreeds();
     }
 

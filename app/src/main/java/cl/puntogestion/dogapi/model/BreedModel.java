@@ -8,6 +8,7 @@ import java.util.Map;
 
 import cl.puntogestion.dogapi.model.api.IDogDataBase;
 import cl.puntogestion.dogapi.model.api.RetrofitClient;
+import cl.puntogestion.dogapi.presenter.IPresenterModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,6 +18,7 @@ import retrofit2.Response;
 public class BreedModel implements IModel {
     //Esta es la interfaz que se utiliza como Callback para enviar información al Presenter y está implementado en Presenter
     IPresenterModel iPresenterModel;
+    private static final String TAG = "AAA";
 
     //Constructor de clase BreedModel para asignarlo una instancia al Presenter
     public BreedModel(IPresenterModel iPresenterModel) {
@@ -30,24 +32,37 @@ public class BreedModel implements IModel {
         Este método usa Retrofit para obtener los datos, para esto implementa una llamada de Retrofit
         de la forma estándar, inst
          */
+        Log.d(TAG, "En BreedModel loadBreeds");
         //Se crea una instancia de la clase autogenerada de llamadas IDogDataBase llamada servicio a través de la interfaz
         IDogDataBase servicio = RetrofitClient.getRetrofitInstance().create(IDogDataBase.class);
         //Se crea una instancia de la clase Call llamada listCall que recibe como parámetros la clase Pojo RazasLista
         Call<RazasLista> listCall = servicio.listaRazas();
         //Se crea una lista para recibir los datos
+        List<String> listaPerros = new ArrayList<>();
         //Se en cola la llamada a través de listCall
         listCall.enqueue(new Callback<RazasLista>() {
             @Override
             public void onResponse(Call<RazasLista> call, Response<RazasLista> response) {
+                Log.d(TAG, "En BreedModel loadBreeds respuesta correcta");
                 RazasLista listaRazas = response.body();
-                List<String> listaPerros = listaRazas.getMessage();
+                Map<String, List<String>> mapa = listaRazas.getMessage();
+                for (String key : mapa.keySet()) {
+                    if (mapa.get(key).isEmpty()) {
+                        listaPerros.add(key);
+                    } else {
+                        for (String subRaza : mapa.get(key)) {
+                            listaPerros.add(key + " " + subRaza);
+                        }
+                    }
 
+                }
+                Log.d(TAG, "En BreedModel loadBreeds respuesta correcta lista" + listaPerros);
                 iPresenterModel.notificar(listaPerros);
             }
 
             @Override
             public void onFailure(Call<RazasLista> call, Throwable t) {
-
+                Log.d(TAG, "En BreedModel loadBreeds fallamos", t);
             }
         });
 

@@ -1,7 +1,5 @@
 package cl.puntogestion.dogapi.view;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -92,7 +90,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
 
     @Override
     public void notificar(List<String> lista) {
-        Log.d("Datos", ""+lista);
+        Log.d(TAG, ""+lista);
         MyDogRecyclerViewAdapter myAdaptador = new MyDogRecyclerViewAdapter(lista, mListener );
         recyclerView.setAdapter(myAdaptador);
     }

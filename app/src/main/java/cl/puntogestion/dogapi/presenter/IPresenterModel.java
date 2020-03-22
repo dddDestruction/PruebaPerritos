@@ -1,4 +1,4 @@
-package cl.puntogestion.dogapi.model;
+package cl.puntogestion.dogapi.presenter;
 
 import java.util.List;
 

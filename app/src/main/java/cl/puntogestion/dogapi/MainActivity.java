@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Listo");
-        /*
+
         //Se inicia una nueva trasacción
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //Se crea una isntancia de fragmento de lista de raza y se asigna al atributo de clase
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         //Se commitean las operaciones de la transacción y se agrega la misma al FragmentManager con .addToBackStack
         fragmentTransaction.commit();
 
-         */
+
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
