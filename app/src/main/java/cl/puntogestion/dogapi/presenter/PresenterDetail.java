@@ -22,7 +22,7 @@ public class PresenterDetail implements IPresenterDetail, IPresenterModel {
     @Override
     public void loadBreedImages(String breed) {
         imodel.loadImages(breed);
-        Log.d("AAA", "loadIMages En Presenter");
+        Log.d("AAA", "loadIMages En Presenter " + breed);
     }
 
     @Override

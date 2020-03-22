@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cl.puntogestion.dogapi.view.DetailFragment;
 import cl.puntogestion.dogapi.view.FavoritosFragment;
 import cl.puntogestion.dogapi.view.ListDogFragment;
@@ -32,10 +35,20 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
 
      */
     FragmentManager fragmentManager = getFragmentManager();
+    FloatingActionButton fab;
     //Se crean variables de fragmento de lista de razas y detalle de raza para utilizar las mismas en cada método de la actividad
     ListDogFragment fragLista;
     DetailFragment fragDetalle;
     FavoritosFragment fragFav;
+    protected static List<String> listaImagenes = new ArrayList<String>();
+
+    public static List<String> getImagenes() {
+        return listaImagenes;
+    }
+
+    public void addImagenes(String url){
+        this.listaImagenes.add(url);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +67,15 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
 
 
 
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Hice click para ver favoritos", Toast.LENGTH_LONG).show();
+                fab.setVisibility(View.GONE);
                 FragmentTransaction fragmentTransactionFav = fragmentManager.beginTransaction();
                 fragFav = FavoritosFragment.newInstance();
-                fragmentTransactionFav.add(R.id.frame_container, fragFav, "lista");
-                fragmentTransactionFav.commit();
+                fragmentTransactionFav.replace(R.id.frame_container, fragFav, "listaFav");
+                fragmentTransactionFav.addToBackStack("listaFav").commit();
             }
         });
 
@@ -109,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
             //finish() es para cerrar la aplicación
             finish();
         } else {
+            fab.setVisibility(View.VISIBLE);
             //En cualquier otro case se asume que se esta mostrando el fragmento detalle,.
             Log.d(TAG, "En detalle");
             //Se muestra vuelve a realizar la última transacción
@@ -120,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     @Override
     public void OnLongClickPerritos(String urlImagen) {
         Log.d("DDD", "En ONLongClickPerritos en Main");
-        Toast.makeText(this, "Me gusta este perrito", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, " "+urlImagen, Toast.LENGTH_LONG).show();
+        addImagenes(urlImagen);
     }
 }
