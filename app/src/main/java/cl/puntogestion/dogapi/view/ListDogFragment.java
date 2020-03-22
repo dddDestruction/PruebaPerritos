@@ -29,7 +29,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
+    private static final String TAG = "AAA";
     RecyclerView recyclerView;
 
     /**
@@ -44,6 +44,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
+        Log.d(TAG, "En newInstance de ListDogFragment");
         return fragment;
     }
 
@@ -62,6 +63,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
         View view = inflater.inflate(R.layout.fragment_dog_list, container, false);
 
         // Set the adapter
+        Log.d(TAG, "En onCreateView de ListDogFragment");
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             mListener = (OnListFragmentInteractionListener) context;
@@ -71,10 +73,13 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            Log.d(TAG, "En onCreateView de ListDogFragment después de crear el recycler");
             Presenter presentador = new Presenter(this);
             presentador.setImodel(new BreedModel(presentador));
             presentador.loadBreeds();
+            Log.d(TAG, "En onCreateView de ListDogFragment después de presentador.loadBreeds()");
         }
+        Log.d(TAG, "En onCreateView de ListDogFragment antes del return");
         return view;
     }
 

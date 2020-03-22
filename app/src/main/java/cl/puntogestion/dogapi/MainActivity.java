@@ -11,11 +11,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
-
 import cl.puntogestion.dogapi.view.DetailFragment;
 import cl.puntogestion.dogapi.view.ListDogFragment;
-import cl.puntogestion.dogapi.view.MyDogRecyclerViewAdapter;
 
 /*
 La idea de este código es que se pueda navegar por la app correctament, es decir que cuando se precione una raza
@@ -43,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Listo");
+        /*
         //Se inicia una nueva trasacción
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //Se crea una isntancia de fragmento de lista de raza y se asigna al atributo de clase
@@ -52,7 +50,9 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         //Se commitean las operaciones de la transacción y se agrega la misma al FragmentManager con .addToBackStack
         fragmentTransaction.commit();
 
-        FloatingActionButton fab = findViewById(R.id.favoritos);
+         */
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,12 +60,15 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
             }
         });
 
+
+
     }
 
     //Este es el listener de la actividad, este método se ejecuta cuando se hace un click sobre una raza
     @Override
     public void onListFragmentInteraction(String raza) {
         Log.d(TAG, raza);
+        /*
         //Se crea una nueva transacción
         FragmentTransaction fragmentTransactionListener = fragmentManager.beginTransaction();
         //Se elimina la el fragmento del FragmenManager
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         fragmentTransactionListener.add(R.id.frame_container, fragDetalle, "detalle");
         //Se Agrega la transacción al FragmentManager con el nombre "detalle" para identificarlo y se commitea
         fragmentTransactionListener.addToBackStack("detalle").commit();
+
+         */
     }
     /*
     Aquí se busca programar las acciones que se realizan por la app cuando se apreta el botón voler del celular
