@@ -1,6 +1,7 @@
 package cl.puntogestion.dogapi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import cl.puntogestion.dogapi.databinding.ActivityMainBinding;
 import cl.puntogestion.dogapi.view.DetailFragment;
 import cl.puntogestion.dogapi.view.FavoritosFragment;
 import cl.puntogestion.dogapi.view.ListDogFragment;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         Log.d(TAG, "Listo");
 
         //Se inicia una nueva trasacción
