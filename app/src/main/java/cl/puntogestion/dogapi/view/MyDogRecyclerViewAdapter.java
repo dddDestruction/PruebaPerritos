@@ -1,5 +1,6 @@
 package cl.puntogestion.dogapi.view;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cl.puntogestion.dogapi.R;
+import cl.puntogestion.dogapi.databinding.FragmentDogBinding;
 import cl.puntogestion.dogapi.view.ListDogFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
@@ -44,20 +46,15 @@ public class MyDogRecyclerViewAdapter extends RecyclerView.Adapter<MyDogRecycler
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_dog, parent, false);
-        return new ViewHolder(view);
+        FragmentDogBinding dogBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.fragment_dog, parent, false);
+        return new ViewHolder(dogBinding);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position));
-        holder.mContentView.setText(mValues.get(position));
-        Log.i("Valor holderItem", holder.mItem);
-
-
-         }
+        holder.dogBinding.itemNumber.setText(mValues.get(position));
+        Log.i("Valor holderItem", holder.toString());
+    }
 
     @Override
     public int getItemCount() {
@@ -69,24 +66,17 @@ public class MyDogRecyclerViewAdapter extends RecyclerView.Adapter<MyDogRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public String mItem;
+        public final FragmentDogBinding dogBinding;
 
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-            view.setOnClickListener(this);
-            mIdView.setOnClickListener(this);
-            mContentView.setOnClickListener(this);
+        public ViewHolder(FragmentDogBinding dogBinding) {
+            super(dogBinding.getRoot());
+            this.dogBinding = dogBinding;
+            this.dogBinding.getRoot().setOnClickListener(this);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + dogBinding.toString() + "'";
         }
 
         @Override
