@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import cl.puntogestion.dogapi.databinding.FragmentDogListBinding;
 import cl.puntogestion.dogapi.model.BreedModel;
 import cl.puntogestion.dogapi.presenter.Presenter;
 import cl.puntogestion.dogapi.R;
@@ -29,6 +31,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
     private OnListFragmentInteractionListener mListener;
     private static final String TAG = "AAA";
     RecyclerView recyclerView;
+    private FragmentDogListBinding listBiding;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,14 +61,14 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dog_list, container, false);
+        listBiding = DataBindingUtil.inflate(inflater, R.layout.fragment_dog_list,container, false);
 
         // Set the adapter
         Log.d(TAG, "En onCreateView de ListDogFragment");
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
+        if (listBiding.getRoot() instanceof RecyclerView) {
+            Context context = listBiding.getRoot().getContext();
             mListener = (OnListFragmentInteractionListener) context;
-            recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) listBiding.getRoot();
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -78,7 +81,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
             Log.d(TAG, "En onCreateView de ListDogFragment después de presentador.loadBreeds()");
         }
         Log.d(TAG, "En onCreateView de ListDogFragment antes del return");
-        return view;
+        return listBiding.getRoot();
     }
 
 
