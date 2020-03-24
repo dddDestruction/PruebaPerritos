@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     ListDogFragment fragLista;
     DetailFragment fragDetalle;
     FavoritosFragment fragFav;
+    ActivityMainBinding mainBinding;
+
     protected static List<String> listaImagenes = new ArrayList<String>();
 
     public static List<String> getImagenes() {
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         Log.d(TAG, "Listo");
 
         //Se inicia una nueva trasacción
@@ -68,12 +70,10 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         fragmentTransaction.commit();
 
 
-
-        fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mainBinding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fab.setVisibility(View.GONE);
+                mainBinding.floatingActionButton.setVisibility(View.GONE);
                 FragmentTransaction fragmentTransactionFav = fragmentManager.beginTransaction();
                 fragFav = FavoritosFragment.newInstance();
                 fragmentTransactionFav.replace(R.id.frame_container, fragFav, "listaFav");
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
             //finish() es para cerrar la aplicación
             finish();
         } else {
-            fab.setVisibility(View.VISIBLE);
+            mainBinding.floatingActionButton.setVisibility(View.VISIBLE);
             //En cualquier otro case se asume que se esta mostrando el fragmento detalle,.
             Log.d(TAG, "En detalle");
             //Se muestra vuelve a realizar la última transacción
