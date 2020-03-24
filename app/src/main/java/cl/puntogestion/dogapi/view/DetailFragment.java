@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cl.puntogestion.dogapi.R;
+import cl.puntogestion.dogapi.databinding.FragmentDetailBinding;
 import cl.puntogestion.dogapi.model.BreedModel;
 import cl.puntogestion.dogapi.presenter.IPresenterViewDetail;
 import cl.puntogestion.dogapi.presenter.PresenterDetail;
@@ -34,6 +36,7 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
     private String subRaza;
     private OnLongClickPerritos listener;
     RecyclerView recyclerView;
+    private FragmentDetailBinding detailBinding;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -67,13 +70,12 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_detail, container, false);
+        detailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false);
 
-        Context context = view.getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewDetail);
+        Context context = detailBinding.getRoot().getContext();
+        recyclerView = detailBinding.recyclerViewDetail;
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        TextView titulo = view.findViewById(R.id.raza);
-        TextView subTitulo = view.findViewById(R.id.subraza);
+
         listener = (OnLongClickPerritos) context;
         //Enlace entre vista y presentador
         PresenterDetail presentador = new PresenterDetail(this);
@@ -86,17 +88,16 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
             Log.d("DDD", "raza cortado " + raza);
             Log.d("DDD", "subRaza cortado " + subRaza);
             presentador.loadSubBreedImages(raza, subRaza);
-
-            titulo.setText(raza);
-            subTitulo.setText(subRaza);
+            detailBinding.setRaza(raza);
+            detailBinding.setSubraza(subRaza);
         }else{
             presentador.loadBreedImages(raza);
-            titulo.setText(raza);
-            subTitulo.setText("");
+            detailBinding.setRaza(raza);
+            detailBinding.setSubraza("");
         }
 
 
-        return view;
+        return detailBinding.getRoot();
     }
 
     @Override
