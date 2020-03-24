@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -19,9 +20,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.List;
 
 import cl.puntogestion.dogapi.R;
+import cl.puntogestion.dogapi.databinding.FragmentFavoritosBinding;
 
 public class FavoritosFragment extends Fragment {
     RecyclerView recyclerView;
+    private FragmentFavoritosBinding favoritosBinding;
     private static final String TAG = "AAA";
     //Agregar parámetros
     private Button botonFavoritos;
@@ -52,14 +55,14 @@ public class FavoritosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "En OnCreateView en FavoritosFragment");
-        View view =  inflater.inflate(R.layout.fragment_favoritos, container, false);
+        favoritosBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoritos, container, false);
 
-        Context context = view.getContext();
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewFavoritos);
+        Context context = favoritosBinding.getRoot().getContext();
+        recyclerView = (RecyclerView) favoritosBinding.getRoot().findViewById(R.id.recyclerViewFavoritos);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
         FavoritosAdapter myAdaptador = new FavoritosAdapter();
         myAdaptador.setListaFav();
         recyclerView.setAdapter(myAdaptador);
-        return view;
+        return favoritosBinding.getRoot();
     }
 }
