@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 import cl.puntogestion.dogapi.R;
+import cl.puntogestion.dogapi.databinding.ItemImagenFavBinding;
 import cl.puntogestion.dogapi.presenter.PresenterFav;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.ViewHolder> {
@@ -26,15 +28,15 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
     @Override
     public FavoritosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "En onCreateViewHolder en FavoritosAdapter");
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_imagen_fav, parent, false);
-        return new ViewHolder(view);
+        ItemImagenFavBinding itemImagenFavBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_imagen_fav, parent, false);
+
+        return new ViewHolder(itemImagenFavBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoritosAdapter.ViewHolder holder, int position) {
-        Log.d(TAG, "En onBindViewHolder en FavoritosAdapter "+listaFav.get(position) + holder.imagenFav);
-        Picasso.get().load(listaFav.get(position)).into(holder.imagenFav);
+        Log.d(TAG, "En onBindViewHolder en FavoritosAdapter "+listaFav.get(position) + holder.itemImagenFavBinding.imageViewFav);
+        Picasso.get().load(listaFav.get(position)).into(holder.itemImagenFavBinding.imageViewFav);
 
     }
 
@@ -45,10 +47,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final ImageView imagenFav;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imagenFav = itemView.findViewById(R.id.imageViewFav);
+        public final ItemImagenFavBinding itemImagenFavBinding;
+        public ViewHolder(@NonNull ItemImagenFavBinding itemImagenFavBinding) {
+            super(itemImagenFavBinding.getRoot());
+            this.itemImagenFavBinding = itemImagenFavBinding;
         }
     }
 

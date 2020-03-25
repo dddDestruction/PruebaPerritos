@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import cl.puntogestion.dogapi.R;
+import cl.puntogestion.dogapi.databinding.ItemImagenFavBinding;
+import cl.puntogestion.dogapi.databinding.ItemImagenesBinding;
 
 /*
     El Adapter es una clase que extiende de RecyclerView.Adapter< aquí va el ViewHolder > que
@@ -54,9 +57,9 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
     @NonNull
     @Override
     public DogPhotoRecycleViewAdapter.ViewHolderImages onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_imagenes, parent, false);
-        return new ViewHolderImages(view);
+        ItemImagenesBinding itemImagenesBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_imagenes, parent, false);
+
+        return new ViewHolderImages(itemImagenesBinding);
     }
 
     @Override
@@ -64,10 +67,10 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
         Log.d(TAG, "onBindDetail");
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.perrito);
 
-        Glide.with(holder.perrito.getContext()) //3
+        Glide.with(holder.itemImagenesBinding.getRoot().getContext()) //3
                 .load(mUrls.get(position))
                 .centerCrop()
-                .into(holder.perrito);
+                .into(holder.itemImagenesBinding.imageView);
 
 
     }
@@ -82,22 +85,15 @@ public class DogPhotoRecycleViewAdapter  extends RecyclerView.Adapter<DogPhotoRe
     }
 
     public class ViewHolderImages extends RecyclerView.ViewHolder implements View.OnLongClickListener{
-        public final ImageView perrito;
-
-        public ViewHolderImages(@NonNull View itemView) {
-            super(itemView);
-            perrito = itemView.findViewById(R.id.imageView);
-            itemView.setOnLongClickListener(this);
-            perrito.setOnLongClickListener(this);
+        public final ItemImagenesBinding itemImagenesBinding;
+        public ViewHolderImages(@NonNull ItemImagenesBinding itemImagenesBinding) {
+            super(itemImagenesBinding.getRoot());
+            this.itemImagenesBinding = itemImagenesBinding;
+            this.itemImagenesBinding.getRoot().setOnLongClickListener(this);
+            this.itemImagenesBinding.imageView.setOnLongClickListener(this);
         }
 
-        @Override
-        public String toString() {
-            return "ViewHolderImages{" +
-                    "perrito=" + perrito +
-                    ", itemView=" + itemView +
-                    '}';
-        }
+
 
         @Override
         public boolean onLongClick(View v) {
