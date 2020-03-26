@@ -59,7 +59,7 @@ public class FavoritosFragment extends Fragment {
 
         Context context = favoritosBinding.getRoot().getContext();
         recyclerView = (RecyclerView) favoritosBinding.getRoot().findViewById(R.id.recyclerViewFavoritos);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         FavoritosAdapter myAdaptador = new FavoritosAdapter();
         myAdaptador.setListaFav();
         recyclerView.setAdapter(myAdaptador);

@@ -36,7 +36,12 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
     @Override
     public void onBindViewHolder(@NonNull FavoritosAdapter.ViewHolder holder, int position) {
         Log.d(TAG, "En onBindViewHolder en FavoritosAdapter "+listaFav.get(position) + holder.itemImagenFavBinding.imageViewFav);
-        Picasso.get().load(listaFav.get(position)).into(holder.itemImagenFavBinding.imageViewFav);
+        //Picasso.get().load(listaFav.get(position)).into(holder.itemImagenFavBinding.imageViewFav);
+
+        Glide.with(holder.itemImagenFavBinding.getRoot().getContext()) //3
+                .load(listaFav.get(position))
+                .centerCrop()
+                .into(holder.itemImagenFavBinding.imageViewFav);
 
     }
 
