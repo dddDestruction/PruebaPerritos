@@ -70,7 +70,7 @@ public class ListDogFragment extends Fragment implements Presenter.IPresenterVie
             mListener = (OnListFragmentInteractionListener) context;
             recyclerView = (RecyclerView) listBiding.getRoot();
             if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }

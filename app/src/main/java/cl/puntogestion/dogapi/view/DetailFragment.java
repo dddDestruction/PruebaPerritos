@@ -74,7 +74,7 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
 
         Context context = detailBinding.getRoot().getContext();
         recyclerView = detailBinding.recyclerViewDetail;
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
         listener = (OnLongClickPerritos) context;
         //Enlace entre vista y presentador
