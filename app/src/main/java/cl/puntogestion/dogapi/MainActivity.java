@@ -1,5 +1,6 @@
 package cl.puntogestion.dogapi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -55,21 +56,27 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("paso", "poraqui");
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        Log.d(TAG, "Listo");
-
-        //Se inicia una nueva trasacción
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //Se crea una isntancia de fragmento de lista de raza y se asigna al atributo de clase
-        this.fragLista = ListDogFragment.newInstance(1);
-        //Se agrega el fragmento junto con el contenedor asociado y una tag para identificarlo al FragmentManager
-        fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
-        //Se commitean las operaciones de la transacción y se agrega la misma al FragmentManager con .addToBackStack
-        fragmentTransaction.commit();
-
-
+        Log.d(TAG, "Listo" + savedInstanceState);
+        if (savedInstanceState == null) {
+                //Se inicia una nueva trasacción
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                //Se crea una isntancia de fragmento de lista de raza y se asigna al atributo de clase
+                this.fragLista = ListDogFragment.newInstance(1);
+                //Se agrega el fragmento junto con el contenedor asociado y una tag para identificarlo al FragmentManager
+                fragmentTransaction.add(R.id.frame_container, fragLista, "lista");
+                //Se commitean las operaciones de la transacción y se agrega la misma al FragmentManager con .addToBackStack
+                fragmentTransaction.commit();
+            Log.d(TAG, "Listo" + fragmentTransaction);
+        }
         mainBinding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,9 +87,6 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
                 fragmentTransactionFav.addToBackStack("listaFav").commit();
             }
         });
-
-
-
     }
 
     //Este es el listener de la actividad, este método se ejecuta cuando se hace un click sobre una raza
@@ -109,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     de la clase AppCompatActivity de la cual extiende esta clase, por eso tiene @Override encima.
 
      */
+
+
+
     @Override
     public void onBackPressed()
     {

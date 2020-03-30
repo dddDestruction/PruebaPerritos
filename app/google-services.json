@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "388967175468",
+    "firebase_url": "https://android-cc4b8.firebaseio.com",
+    "project_id": "android-cc4b8",
+    "storage_bucket": "android-cc4b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388967175468:android:8b5c3c7a722a83ff054889",
+        "android_client_info": {
+          "package_name": "cl.puntogestion.dogapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388967175468-12g6frnr4aokj2brh3i58olst1ag20ma.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cl.puntogestion.dogapi",
+            "certificate_hash": "1a5eba4091cf964f10aad1f0a5ff811aadbdab00"
+          }
+        },
+        {
+          "client_id": "388967175468-c1r40tgttuebkkh0u4928hmpac26kdub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz7GYPZ6PB-0wKjQGoLTONuDjjzv43Hbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388967175468-c1r40tgttuebkkh0u4928hmpac26kdub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
