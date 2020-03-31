@@ -4,10 +4,13 @@ import java.util.List;
 //No se si esta clase sirva algún día
 public class ImagenesFavoritas {
 
-    private List<String> imagenes;
+    private String imagen;
 
-    public List<String> getImagenes() {
-        return imagenes;
+    public ImagenesFavoritas(String imagen) {
+        this.imagen = imagen;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
 }

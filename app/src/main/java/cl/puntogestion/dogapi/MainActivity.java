@@ -11,12 +11,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cl.puntogestion.dogapi.databinding.ActivityMainBinding;
+import cl.puntogestion.dogapi.model.ImagenesFavoritas;
 import cl.puntogestion.dogapi.view.DetailFragment;
 import cl.puntogestion.dogapi.view.FavoritosFragment;
 import cl.puntogestion.dogapi.view.ListDogFragment;
@@ -44,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     DetailFragment fragDetalle;
     FavoritosFragment fragFav;
     ActivityMainBinding mainBinding;
+    FirebaseFirestore db;
+    CollectionReference midb;
 
     protected static List<String> listaImagenes = new ArrayList<String>();
 
@@ -52,6 +61,13 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     }
 
     public void addImagenes(String url){
+        ImagenesFavoritas imagen = new ImagenesFavoritas(url);
+        midb.add(imagen).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
         this.listaImagenes.add(url);
     }
 
@@ -65,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        db = FirebaseFirestore.getInstance();
+        midb = db.collection("DBPruebaAndroid");
         Log.d(TAG, "Listo" + savedInstanceState);
         if (savedInstanceState == null) {
                 //Se inicia una nueva trasacción
