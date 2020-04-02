@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cl.puntogestion.dogapi.databinding.ActivityMainBinding;
+import cl.puntogestion.dogapi.model.FirebaseModel;
+import cl.puntogestion.dogapi.model.IFirebaseModel;
+import cl.puntogestion.dogapi.presenter.PresenterFav;
 import cl.puntogestion.dogapi.view.DetailFragment;
 import cl.puntogestion.dogapi.view.FavoritosFragment;
 import cl.puntogestion.dogapi.view.ListDogFragment;
@@ -44,14 +47,8 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     DetailFragment fragDetalle;
     FavoritosFragment fragFav;
     ActivityMainBinding mainBinding;
+    protected PresenterFav presenterFav;
 
-
-    protected static List<String> listaImagenes = new ArrayList<String>();
-
-    public void addImagenes(String url){
-
-        this.listaImagenes.add(url);
-    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -145,9 +142,10 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     @Override
     public void OnLongClickPerritos(String urlImagen) {
         Log.d("DDD", "En ONLongClickPerritos en Main");
-        Toast.makeText(this, " "+urlImagen, Toast.LENGTH_LONG).show();
-
-        addImagenes(urlImagen);
+        Toast.makeText(this, "<3", Toast.LENGTH_LONG).show();
+        presenterFav = new PresenterFav();
+        presenterFav.setiFirebaseModel(new FirebaseModel(presenterFav));
+        presenterFav.addFavBreedImagen(urlImagen);
     }
 
     @Override

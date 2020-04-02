@@ -2,6 +2,8 @@ package cl.puntogestion.dogapi.presenter;
 
 import android.util.Log;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,9 @@ public class PresenterFav implements IPresenterFav, IPresenterDB {
     private static final String TAG = "AAA";
     private IFirebaseModel iFirebaseModel;
     private IPresenterFavView iPresenterFavView;
+
+    public PresenterFav() {
+    }
 
     public PresenterFav(IPresenterFavView iPresenterFavView) {
         this.iPresenterFavView = iPresenterFavView;
@@ -38,11 +43,13 @@ public class PresenterFav implements IPresenterFav, IPresenterDB {
     }
 
     @Override
-    public void notificarFavImagenes(Map<String, Object> imagenesFav) {
-
-        for (String key : imagenesFav.keySet()){
-            favoritas.add(imagenesFav.get(key).toString());
+    public void notificarFavImagenes(List<DocumentSnapshot> imagenesFav) {
+        for (DocumentSnapshot doc:imagenesFav){
+            for (String key : doc.getData().keySet()){
+                favoritas.add(doc.getData().get(key).toString());
+            }
         }
+
         Log.d(TAG, "En PresenterFav, notificarFavImagenes() " + favoritas);
         iPresenterFavView.notificarFav(favoritas);
     }

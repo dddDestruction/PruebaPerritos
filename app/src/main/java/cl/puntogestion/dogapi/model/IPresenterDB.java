@@ -1,7 +1,9 @@
 package cl.puntogestion.dogapi.model;
 
-import java.util.Map;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.List;
 
 public interface IPresenterDB {
-    void notificarFavImagenes(Map<String, Object> imagenesFav);
+    void notificarFavImagenes(List<DocumentSnapshot> imagenesFav);
 }

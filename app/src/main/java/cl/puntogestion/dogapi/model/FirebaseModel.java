@@ -25,11 +25,12 @@ public class FirebaseModel  implements IFirebaseModel{
 
     @Override
     public void addFavImagenes(String url) {
+        Log.d(TAG, "En FirebaseModel, addFavImagenes(), url " + url);
         ImagenesFavoritas imagen = new ImagenesFavoritas(url);
         midb.add(imagen).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
+                Log.d(TAG, "En FirebaseModel, addFavImagenes(), falla " + e);
             }
         });
     }
@@ -58,7 +59,7 @@ public class FirebaseModel  implements IFirebaseModel{
                    obtenida de la base de datos.
                  */
                 Log.d(TAG, "En FirebaseModel, getFavImagenes(), Data " + task.getResult().getDocuments().get(0).getData());
-                iPresenterDB.notificarFavImagenes(task.getResult().getDocuments().get(0).getData());
+                iPresenterDB.notificarFavImagenes(task.getResult().getDocuments());
             }
         });
 
