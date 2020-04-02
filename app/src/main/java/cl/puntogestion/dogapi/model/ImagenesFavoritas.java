@@ -1,7 +1,7 @@
 package cl.puntogestion.dogapi.model;
 
 import java.util.List;
-//No se si esta clase sirva algún día
+//Pojo para guardar los datos en la DB de Firebase
 public class ImagenesFavoritas {
 
     private String imagen;

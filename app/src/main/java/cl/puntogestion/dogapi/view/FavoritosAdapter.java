@@ -22,8 +22,13 @@ import cl.puntogestion.dogapi.presenter.PresenterFav;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.ViewHolder> {
     private List<String> listaFav;
-    private PresenterFav presenter = new PresenterFav();
+
     private static final String TAG = "AAA";
+
+    public FavoritosAdapter(List<String> listaFav) {
+        this.listaFav = listaFav;
+    }
+
     @NonNull
     @Override
     public FavoritosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,8 +64,4 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.View
         }
     }
 
-    public void setListaFav() {
-        Log.d(TAG, "En setListFav en FavoritosAdapter");
-        this.listaFav = presenter.notificarFav();
-    }
 }
