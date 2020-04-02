@@ -4,10 +4,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import cl.puntogestion.dogapi.MainActivity;
 
-public class PresenterFav {
+public class PresenterFav implements IPresenterFav{
 
     private List<String> favoritas = new ArrayList<String>();
     private static final String TAG = "AAA";
@@ -21,4 +22,8 @@ public class PresenterFav {
         return MainActivity.getImagenes();
     }
 
+    @Override
+    public void showFavBreedImages(Map<String, String> breed) {
+
+    }
 }

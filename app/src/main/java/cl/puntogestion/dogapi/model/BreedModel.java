@@ -8,7 +8,6 @@ import java.util.Map;
 
 import cl.puntogestion.dogapi.model.api.IDogDataBase;
 import cl.puntogestion.dogapi.model.api.RetrofitClient;
-import cl.puntogestion.dogapi.presenter.IPresenterModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

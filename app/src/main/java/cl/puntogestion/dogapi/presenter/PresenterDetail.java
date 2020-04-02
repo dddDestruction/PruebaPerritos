@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import cl.puntogestion.dogapi.model.IModel;
+import cl.puntogestion.dogapi.model.IPresenterModel;
 
 public class PresenterDetail implements IPresenterDetail, IPresenterModel {
 

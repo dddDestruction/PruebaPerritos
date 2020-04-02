@@ -9,19 +9,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import cl.puntogestion.dogapi.R;
 import cl.puntogestion.dogapi.databinding.FragmentDetailBinding;
 import cl.puntogestion.dogapi.model.BreedModel;
-import cl.puntogestion.dogapi.presenter.IPresenterViewDetail;
+import cl.puntogestion.dogapi.presenter.IPresenterFav;
 import cl.puntogestion.dogapi.presenter.PresenterDetail;
 
 /**
@@ -29,7 +28,7 @@ import cl.puntogestion.dogapi.presenter.PresenterDetail;
  * Use the {@link DetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DetailFragment extends Fragment implements PresenterDetail.IPresenterViewImages, IPresenterViewDetail {
+public class DetailFragment extends Fragment implements PresenterDetail.IPresenterViewImages {
     private static final String ARG_PARAM1 = "raza";
 
     private String raza;
@@ -105,11 +104,6 @@ public class DetailFragment extends Fragment implements PresenterDetail.IPresent
         Log.d("DDD", "En Adapter "+lista);
         DogPhotoRecycleViewAdapter myAdaptador = new DogPhotoRecycleViewAdapter(lista, listener);
         recyclerView.setAdapter(myAdaptador);
-    }
-
-    @Override
-    public void showBreedImages(String breed) {
-
     }
 
     public interface OnLongClickPerritos {

@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.List;
 
 import cl.puntogestion.dogapi.model.IModel;
+import cl.puntogestion.dogapi.model.IPresenterModel;
 
 public class Presenter implements IPresenter, IPresenterModel {
 
@@ -27,16 +28,6 @@ public class Presenter implements IPresenter, IPresenterModel {
     public void loadBreeds() {
         Log.d(TAG, "En Presenter loadBreeds");
         imodel.loadBreeds();
-    }
-
-    @Override
-    public void loadBreedImages(String raza) {
-
-    }
-
-    @Override
-    public void loadSubBreedImages(String raza, String subraza) {
-
     }
 
     @Override
