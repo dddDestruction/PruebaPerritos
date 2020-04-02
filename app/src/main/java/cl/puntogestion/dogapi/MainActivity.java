@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
 
             }
         });
+
         this.listaImagenes.add(url);
     }
 
@@ -84,6 +86,13 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
         db = FirebaseFirestore.getInstance();
         midb = db.collection("DBPruebaAndroid");
         Log.d(TAG, "Listo" + savedInstanceState);
+        midb.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.d(TAG, "Data " + task.getResult().getDocuments().get(0).getData());
+            }
+        });
+
         if (savedInstanceState == null) {
                 //Se inicia una nueva trasacción
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -99,10 +108,14 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
             @Override
             public void onClick(View v) {
                 mainBinding.floatingActionButton.setVisibility(View.GONE);
+                Log.d(TAG, "Data " + midb.get().getResult().getDocuments().get(0).getData());
+                /*
                 FragmentTransaction fragmentTransactionFav = fragmentManager.beginTransaction();
                 fragFav = FavoritosFragment.newInstance();
                 fragmentTransactionFav.replace(R.id.frame_container, fragFav, "listaFav");
                 fragmentTransactionFav.addToBackStack("listaFav").commit();
+
+                 */
             }
         });
     }
@@ -162,6 +175,13 @@ public class MainActivity extends AppCompatActivity implements ListDogFragment.O
     public void OnLongClickPerritos(String urlImagen) {
         Log.d("DDD", "En ONLongClickPerritos en Main");
         Toast.makeText(this, " "+urlImagen, Toast.LENGTH_LONG).show();
+
         addImagenes(urlImagen);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }
