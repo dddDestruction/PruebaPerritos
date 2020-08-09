@@ -83,6 +83,8 @@ public class MyDogRecyclerViewAdapter extends RecyclerView.Adapter<MyDogRecycler
         public void onClick(View v) {
             Log.d(TAG, "onClick entrando...");
             mListener.onListFragmentInteraction(getId(getAdapterPosition()));
+
+
         }
 
     }
